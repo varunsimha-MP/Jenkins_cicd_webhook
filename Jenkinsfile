@@ -16,7 +16,7 @@ pipeline {
                             dir('Jenkins_cicd') {
                                 sh '''
                                     git checkout master || git checkout -b master origin/master
-                                    git pull master
+                                    git pull origin master
                                 '''
                             }
                         } else {
