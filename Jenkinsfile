@@ -47,7 +47,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'github')]) {
                     script {
                         if (fileExists('k8s_test')){
-                            dir('Jenkins_cicd') {
+                            dir('k8s_test') {
                                 sh '''
                                     git checkout master || git checkout -b master origin/master
                                     git pull origin master
