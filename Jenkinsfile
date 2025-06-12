@@ -4,8 +4,8 @@ pipeline {
         AWS_REGION = 'ap-southeast-1'
         AWS_ACCOUNT_ID = '590183945701'
         IMAGE_TAG = "build-${BUILD_NUMBER}"
-        IMAGE_NAME = "varunsimha/python_web_application"
-        FULL_IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
+        ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/python_web_application"
+        FULL_IMAGE = "${ECR_REPO}:${IMAGE_TAG}"
     }
     stages {
 
@@ -41,6 +41,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Push Docker Image To ECR') {
+            steps {
+                sh '''
+                    aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}
+                    docker tag python_web_application:${IMAGE_TAG} ${FULL_IMAGE}
+                    docker push ${FULL_IMAGE}
+                '''
+            }
+        }
+
 
         stage('Clone ArgoCD Repo') {
             steps {
