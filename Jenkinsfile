@@ -20,7 +20,7 @@ pipeline {
                                 '''
                             }
                         } else {
-                            sh 'git clone https://$github@github.com/varunsimha-MP/k8s_test.git'
+                            sh 'git clone https://$github@github.com/varunsimha-MP/Jenkins_cicd_webhook.git'
                         }
                     }
                 }
