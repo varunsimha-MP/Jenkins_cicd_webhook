@@ -35,9 +35,7 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                dir('Jenkins_cicd') {
-                    sh 'docker build -t python_web_application:${IMAGE_TAG} .'
-                }
+                sh 'docker build -t python_web_application:${IMAGE_TAG} .'
             }
         }
 
