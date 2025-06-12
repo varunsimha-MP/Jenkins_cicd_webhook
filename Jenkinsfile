@@ -77,8 +77,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'github')]) {
                     dir('k8s_test') {
                         sh '''
-                            git config user.email "jenkins@ci.com"
-                            git config user.name "Jenkins CI"
+                            git config --global user.email "jenkins@ci.com"
+                            git config --global user.name "Jenkins CI"
 
                             git add ArgoCD/appdeployment.yml
                             git commit -m "Updated image to ${FULL_IMAGE}" || echo "No changes to commit"
