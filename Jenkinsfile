@@ -12,8 +12,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'github')]) {
                     script {
-                        if (fileExists('Jenkins_cicd')) {
-                            dir('Jenkins_cicd') {
+                        if (fileExists('Jenkins_cicd_webhook')) {
+                            dir('Jenkins_cicd_webhook') {
                                 sh '''
                                     git checkout master || git checkout -b master origin/master
                                     git pull origin master
