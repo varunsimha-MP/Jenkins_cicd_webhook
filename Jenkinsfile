@@ -45,7 +45,19 @@ pipeline {
         stage('Clone ArgoCD Repo') {
             steps {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'github')]) {
-                    sh 'git clone https://$github@github.com/varunsimha-MP/k8s_test.git'
+                    script {
+                        if (fileExists('k8s_test')){
+                            dir('Jenkins_cicd') {
+                                sh '''
+                                    git checkout master || git checkout -b master origin/master
+                                    git pull origin master
+                                '''
+                                }
+                            }   
+                        else {
+                            sh 'git clone https://$github@github.com/varunsimha-MP/k8s_test.git'
+                        }
+                    }
                 }
             }
         }
