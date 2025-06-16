@@ -75,7 +75,7 @@ pipeline {
 
         stage('Update ArgoCD YAML') {
             steps {
-                dir('k8s_test/ArgoCD') {
+                dir('k8s_test/Kubernetes with ArgoCD') {
                     sh '''
                         sed -i 's|image:.*|image: '"${FULL_IMAGE}"'|' appdeployment.yml
                     '''
