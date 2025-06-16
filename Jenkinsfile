@@ -60,6 +60,8 @@ pipeline {
                         if (fileExists('k8s_test')){
                             dir('k8s_test') {
                                 sh '''
+                                    sh '''
+                                    git config pull.rebase true
                                     git checkout master || git checkout -b master origin/master
                                     git pull origin master
                                 '''
